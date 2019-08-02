@@ -1,0 +1,26 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: zipkin-client-es0
+  zipkin:
+    sender:
+      type: kafka
+    kafka:
+      topic: zipkin
+    service:
+      name: ${spring.application.name}
+  kafka:
+    bootstrap-servers: localhost:9092 #集群的情况直接用“,”分割
+  sleuth:
+    sampler:
+      probability: 1.0  #默认为0.1；采集率： 10次上传10次
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+  client:
+    serviceUrl:
+      defaultZone: http://putao-dev:putao-dev@localhost:8761/eureka/
